@@ -1,36 +1,52 @@
+<?php
 
+include 'db.php';
+
+// Handle the form submission
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $menuName = $_POST['menu_name'];
+    $menuDescription = $_POST['menu_description'];
+
+    if (insertMenu($menuName, $menuDescription)) {
+        echo "Menu Created Successfully!<br>";
+        echo "Name: " . $menuName . "<br>";
+        echo "Description: " . $menuDescription;
+    } else {
+        echo "There was an error inserting the menu!";
+    }
+    exit;
+}
+
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <div class="topnav">
-    <a class="active" href="#ROCABERTE">ROCABERTE</a>
-    <a href="#MANAGE">MANAGE</a>
-    <a href="#MENU">MENU</a>
-    </div>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Create Menu</title>
 </head>
 <body>
-    
-    <form action="addMenu.php" method="POST" id="menuForm">
-        <div class="mb-3">
-            <label for="menuName" class="form-label">Menu Name</label>
-            <input type="text" class="form-control" id="menuName" name="menuName" maxlength="100" required>
-        </div>
-        <div class="mb-3">
-            <label for="menuDescription" class="form-label">Menu Description</label>
-            <textarea class="form-control" id="menuDescription" name="menuDescription" maxlength="1000" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
 
-   
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
-  
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
- 
-    <script src="script.js"></script>
+<div style="max-width: 500px; margin: 50px auto;">
+    <h2>Rocaberte</h2>
+    <div style="border: 1px solid #e0e0e0; padding: 20px; box-shadow: 2px 2px 12px #aaa;">
+        <h3>Create Menu</h3>
+
+        <form action="" method="post">
+            <div style="margin-bottom: 20px;">
+                <label for="menu_name">Menu Name:</label><br>
+                <input type="text" id="menu_name" name="menu_name" required style="width: 100%; padding: 8px;">
+            </div>
+
+            <div style="margin-bottom: 20px;">
+                <label for="menu_description">Menu Description:</label><br>
+                <textarea id="menu_description" name="menu_description" rows="4" style="width: 100%; padding: 8px;"></textarea>
+            </div>
+
+            <div>
+                <input type="submit" value="Submit" style="padding: 10px 20px; cursor: pointer;">
+            </div>
+        </form>
+    </div>
+</div>
+
 </body>
 </html>
-
